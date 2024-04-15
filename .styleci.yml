@@ -1,0 +1,40 @@
+# Laravel storage
+/storage/*
+
+# Laravel environment file
+.env
+
+# Composer
+/vendor
+
+# NPM
+/node_modules
+
+# PHPStorm
+.idea
+
+# Laravel Mix
+/public/mix-manifest.json
+/public/mix
+
+# Laravel Homestead
+Homestead.yaml
+Homestead.json
+
+# Laravel Valet
+.valet
+
+# Laravel Mix temporary files
+npm-debug.log
+
+# PHPUnit
+/phpunit.xml
+
+# Laravel Dusk
+/storage/screenshots
+/storage/app/public/dusk
+/storage/app/public/dusk-downloads
+
+# Vagrant
+Homestead.yaml
+Homestead.json
