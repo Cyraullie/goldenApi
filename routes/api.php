@@ -47,6 +47,7 @@ Route::post("/newAthlete", [AthleteController::class, "store"]);
 Route::post("/newLevel", [LevelController::class, "store"]);
 Route::post("/newElement", [ElementController::class, "store"]);
 Route::post("/newVariation", [VariationController::class, "store"]);
+Route::post("/newMusic", [MusicController::class, "store"]);
 
 Route::post("/athlete/{id}", [AthleteController::class, "update"]);
 
