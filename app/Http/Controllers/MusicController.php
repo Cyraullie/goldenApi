@@ -36,6 +36,7 @@ class MusicController extends Controller
             $music = new Music();
             $music->name = $request->input("name");
             $music->filename = $musicfileName;
+            $music->image_filepath = $fileName;
             $music->save();
 
             return response('Ok',200);
