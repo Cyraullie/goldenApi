@@ -10,6 +10,7 @@ use App\Http\Controllers\GroupAthleteController;
 use App\Http\Controllers\MusicController;
 use App\Http\Controllers\VariationController;
 use App\Http\Controllers\StateElementController;
+use App\Http\Controllers\AccountController;
 
 /*
 |--------------------------------------------------------------------------
@@ -30,7 +31,12 @@ Route::get('/', function () {
     return view('welcome');
 });
 
+
+Route::get("/accounts", [AccountController::class, "show_all"]);
+Route::get("/verify", [AccountController::class, "verify"]);
+
 Route::get("/musics", [MusicController::class, "show_all"]);
+
 
 Route::get("/group_elements", [GroupElementController::class, "show_all"]);
 Route::get("/athletes", [AthleteController::class, "show_all"]);
@@ -48,6 +54,7 @@ Route::post("/newLevel", [LevelController::class, "store"]);
 Route::post("/newElement", [ElementController::class, "store"]);
 Route::post("/newVariation", [VariationController::class, "store"]);
 Route::post("/newMusic", [MusicController::class, "store"]);
+Route::post("/newAccount", [AccountController::class, "store"]);
 
 Route::post("/athlete/{id}", [AthleteController::class, "update"]);
 
