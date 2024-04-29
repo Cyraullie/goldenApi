@@ -56,7 +56,8 @@ class AccountController extends Controller
             $hashFromDatabase = $account->password;
 
             if (password_verify($password, $hashFromDatabase)) {
-                return response($account->id, 200);
+                $data = [$account->id, $account->role]; 
+                return response($data, 200);
             } else {
                 return response('Bad password', 400);
             }
