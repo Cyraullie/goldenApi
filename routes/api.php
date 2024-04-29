@@ -33,7 +33,7 @@ Route::get('/', function () {
 
 
 Route::get("/accounts", [AccountController::class, "show_all"]);
-Route::get("/verify", [AccountController::class, "verify"]);
+Route::post("/verify", [AccountController::class, "verify"]);
 
 Route::get("/musics", [MusicController::class, "show_all"]);
 

@@ -62,7 +62,7 @@ class AccountController extends Controller
             }
         } else {
             // Le nom n'existe pas dans la table "accounts"
-            return "Le nom n'existe pas dans la table.";
+            return response("Le nom n'existe pas dans la table.", 400);
         }
 
         
