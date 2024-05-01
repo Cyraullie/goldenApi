@@ -16,6 +16,12 @@ class TopicalityController extends Controller
         return $topicalities;
     }
 
+    public function show($topic_id)
+    {
+        $topicality = Topicality::find($topic_id);
+        return $topicality;
+    }
+
     public function store(Request $request)
     {
         if ($imagefile = $request->file('image')) {
@@ -73,7 +79,28 @@ class TopicalityController extends Controller
         } catch (\Exception $e) {
             return response('Bad request:' . $e->getMessage(), 400);
         }
-
-        
     }
+
+    public function delete($id)
+{
+    try {
+        // Trouver l'actualité à supprimer
+        $topicality = Topicality::findOrFail($id);
+
+        // Supprimer le fichier associé à l'actualité
+        $filePath = public_path('topicalities/' . $topicality->filepath);
+        if (file_exists($filePath)) {
+            unlink($filePath);
+        }
+
+        // Supprimer l'actualité de la base de données
+        $topicality->delete();
+
+        // Réponse de succès
+        return response("Le Topic a été supprimée avec succès.", 200);
+    } catch (\Exception $e) {
+        // En cas d'erreur, retourner une réponse d'erreur
+        return response("Erreur lors de la suppression du Topic : " . $e->getMessage(), 400);
+    }
+}
 }

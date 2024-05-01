@@ -38,6 +38,7 @@ Route::post("/verify", [AccountController::class, "verify"]);
 
 
 Route::get("/topicalities", [TopicalityController::class, "show_all"]);
+Route::get("/topicality/{topic_id}", [TopicalityController::class, "show"]);
 Route::get("/musics", [MusicController::class, "show_all"]);
 Route::get("/group_elements", [GroupElementController::class, "show_all"]);
 Route::get("/athletes", [AthleteController::class, "show_all"]);
@@ -60,6 +61,9 @@ Route::post("/newTopicality", [TopicalityController::class, "store"]);
 Route::post("/state_element", [StateElementController::class, "update"]);
 Route::post("/athlete/{id}", [AthleteController::class, "update"]);
 Route::post("/topicality/{id}", [TopicalityController::class, "update"]);
+
+
+Route::delete("/del_topicality/{id}", [TopicalityController::class, "delete"]);
 
 
 
