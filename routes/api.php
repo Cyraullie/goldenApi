@@ -64,6 +64,7 @@ Route::post("/topicality/{id}", [TopicalityController::class, "update"]);
 
 
 Route::delete("/del_topicality/{id}", [TopicalityController::class, "delete"]);
+Route::delete("/del_athlete/{id}", [AthleteController::class, "delete"]);
 
 
 

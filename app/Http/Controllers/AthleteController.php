@@ -77,7 +77,23 @@ class AthleteController extends Controller
         }
     }
     
-
+    public function delete($id)
+    {
+        try {
+            // Trouver l'athlète à supprimer
+            $athlete = Athlete::findOrFail($id);
+    
+            $athlete->stateElements()->delete();
+            // Supprimer l'athlète de la base de données
+            $athlete->delete();
+    
+            // Réponse de succès
+            return response("L'athlète a été supprimé avec succès.", 200);
+        } catch (\Exception $e) {
+            // En cas d'erreur, retourner une réponse d'erreur
+            return response("Erreur lors de la suppression de l'athlète : " . $e->getMessage(), 400);
+        }
+    }
     
 
 }
