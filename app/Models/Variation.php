@@ -14,7 +14,7 @@ class Variation extends Model
         return $this->belongsTo(Element::class, 'element_id');
     }
 
-    public function stateElements() {
+    public function state_elements() {
         return $this->hasMany(StateElement::class);
     }
 }

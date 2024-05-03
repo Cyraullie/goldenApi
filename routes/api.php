@@ -65,6 +65,10 @@ Route::post("/topicality/{id}", [TopicalityController::class, "update"]);
 
 Route::delete("/del_topicality/{id}", [TopicalityController::class, "delete"]);
 Route::delete("/del_athlete/{id}", [AthleteController::class, "delete"]);
+Route::delete("/del_technic/{id}", [GroupElementController::class, "delete"]);
+Route::delete("/del_level/{id}", [LevelController::class, "delete"]);
+Route::delete("/del_element/{id}", [ElementController::class, "delete"]);
+Route::delete("/del_variation/{id}", [VariationController::class, "delete"]);
 
 
 

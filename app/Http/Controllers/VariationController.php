@@ -37,5 +37,26 @@ class VariationController extends Controller
             return response('Bad request:' . $e->getMessage(), 400);
         }
     }
+
+    public function delete($id)
+    {
+        try {
+            // Trouver la variation à supprimer
+            $variation = Variation::findOrFail($id);
+
+            // Supprimer tous les state_elements associés à cette variation
+            $variation->state_elements()->delete();
+
+            // Enfin, supprimer la variation elle-même
+            $variation->delete();
+
+            // Réponse de succès
+            return response("La variation et ses state_elements associés ont été supprimés avec succès.", 200);
+        } catch (\Exception $e) {
+            // En cas d'erreur, retourner une réponse d'erreur
+            return response("Erreur lors de la suppression de la variation : " . $e->getMessage(), 400);
+        }
+    }
+
 }
 
