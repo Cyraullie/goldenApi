@@ -38,16 +38,19 @@ Route::post("/verify", [AccountController::class, "verify"]);
 
 
 Route::get("/topicalities", [TopicalityController::class, "show_all"]);
-Route::get("/topicality/{topic_id}", [TopicalityController::class, "show"]);
 Route::get("/musics", [MusicController::class, "show_all"]);
 Route::get("/group_elements", [GroupElementController::class, "show_all"]);
 Route::get("/athletes", [AthleteController::class, "show_all"]);
-Route::get("/group_elements/{group_elements_id}", [GroupElementController::class, "show"]);
 Route::get("/group_elements/{group_elements_id}/levels", [LevelController::class, "show_all"]);
 Route::get("/group_elements/{group_elements_id}/levels/{levels_id}/elements", [ElementController::class, "show_all"]);
-Route::get("/group_elements/{group_elements_id}/levels/{levels_id}", [LevelController::class, "show"]);
 Route::get("/group_elements/{group_elements_id}/levels/{levels_id}/elements/{elements_id}/variations", [VariationController::class, "show_all"]);
-Route::get("/group_elements/{group_elements_id}/levels/{levels_id}/elements/{elements_id}", [ElementController::class, "show"]);
+
+
+Route::get("/topicality/{topic_id}", [TopicalityController::class, "show"]);
+Route::get("/group_elements/{group_element_id}", [GroupElementController::class, "show"]);
+Route::get("/levels/{level_id}", [LevelController::class, "show"]);
+Route::get("/elements/{element_id}", [ElementController::class, "show"]);
+Route::get("/variations/{variation_id}", [VariationController::class, "show"]);
 
 Route::post("/newGroupElement", [GroupElementController::class, "store"]);
 Route::post("/newAthlete", [AthleteController::class, "store"]);
@@ -61,6 +64,10 @@ Route::post("/newTopicality", [TopicalityController::class, "store"]);
 Route::post("/state_element", [StateElementController::class, "update"]);
 Route::post("/athlete/{id}", [AthleteController::class, "update"]);
 Route::post("/topicality/{id}", [TopicalityController::class, "update"]);
+Route::post("/technic/{id}", [GroupElementController::class, "update"]);
+Route::post("/level/{id}", [LevelController::class, "update"]);
+Route::post("/element/{id}", [ElementController::class, "update"]);
+Route::post("/variation/{id}", [VariationController::class, "update"]);
 
 
 Route::delete("/del_topicality/{id}", [TopicalityController::class, "delete"]);

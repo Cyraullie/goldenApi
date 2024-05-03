@@ -23,6 +23,10 @@ class VariationController extends Controller
         return $array;
     }
 
+    public function show($variation_id){
+        $variation = Variation::find($variation_id);
+        return $variation["name"];
+    }
     
     public function store(Request $request)
     {
@@ -55,6 +59,32 @@ class VariationController extends Controller
         } catch (\Exception $e) {
             // En cas d'erreur, retourner une réponse d'erreur
             return response("Erreur lors de la suppression de la variation : " . $e->getMessage(), 400);
+        }
+    }
+
+    public function update(Request $request, $id)
+    {
+        try {
+            // Récupérer la variation à mettre à jour
+            $variation = Variation::findOrFail($id);
+
+            // Vérifier s'il y a des changements dans les données reçues
+            $name = $request->input("name");
+
+            // Vérifier si le nom a été fourni et s'il est différent du nom actuel
+            if ($name !== null && $variation->name !== $name) {
+                // Mettre à jour le nom de la variation
+                $variation->name = $name;
+            }
+
+            // Enregistrer les modifications
+            $variation->save();
+
+            // Retourner une réponse de succès
+            return response("La variation a été mise à jour avec succès.", 200);
+        } catch (\Exception $e) {
+            // En cas d'erreur, retourner une réponse d'erreur
+            return response("Erreur lors de la mise à jour de la variation : " . $e->getMessage(), 400);
         }
     }
 

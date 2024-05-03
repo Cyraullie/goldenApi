@@ -29,13 +29,9 @@ class LevelController extends Controller
         }
     }
 
-    public function show($group_elements_id, $levels_id){
-        $level = Level::find($levels_id);
-        $groupElement = GroupElement::find($group_elements_id);
-        
-        $array = [strtoupper($groupElement["name"]), strtoupper($level["name"])];
-
-        return $array;
+    public function show($level_id){
+        $level = Level::find($level_id);
+        return $level["name"];
     }
 
     public function delete($id)
@@ -66,5 +62,33 @@ class LevelController extends Controller
             return response("Erreur lors de la suppression du niveau : " . $e->getMessage(), 400);
         }
     }
+
+    public function update(Request $request, $id)
+    {
+        try {
+            // Récupérer le niveau à mettre à jour
+            $level = Level::findOrFail($id);
+
+            // Vérifier s'il y a des changements dans les données reçues
+            $name = $request->input("name");
+
+            // Vérifier si le nom a été fourni et s'il est différent du nom actuel
+            if ($name !== null && $level->name !== $name) {
+                // Mettre à jour le nom du niveau
+                $level->name = $name;
+                // Enregistrer les modifications
+                $level->save();
+                // Retourner une réponse de succès
+                return response("Le niveau a été mis à jour avec succès.", 200);
+            } else {
+                // Si aucun changement n'a été effectué, retourner une réponse appropriée
+                return response("Aucune modification n'a été apportée.", 200);
+            }
+        } catch (\Exception $e) {
+            // En cas d'erreur, retourner une réponse d'erreur
+            return response("Erreur lors de la mise à jour du niveau : " . $e->getMessage(), 400);
+        }
+    }
+
 
 }

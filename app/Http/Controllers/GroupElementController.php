@@ -29,9 +29,9 @@ class GroupElementController extends Controller
         
     }
 
-    public function show($group_elements_id){
-        $groupElement = GroupElement::find($group_elements_id);
-        return strtoupper($groupElement["name"]);
+    public function show($group_element_id){
+        $groupElement = GroupElement::find($group_element_id);
+        return $groupElement["name"];
     }
 
     public function delete($id)
@@ -70,4 +70,32 @@ class GroupElementController extends Controller
             return response("Erreur lors de la suppression de la technique : " . $e->getMessage(), 400);
         }
     }
+
+    public function update(Request $request, $id)
+    {
+        try {
+            // Récupérer le groupElement à mettre à jour
+            $groupElement = GroupElement::findOrFail($id);
+
+            // Vérifier s'il y a des changements dans les données reçues
+            $name = $request->input("name");
+
+            // Vérifier si le nom a été fourni et s'il est différent du nom actuel
+            if ($name !== null && $groupElement->name !== $name) {
+                // Mettre à jour le nom du groupElement
+                $groupElement->name = $name;
+                // Enregistrer les modifications
+                $groupElement->save();
+                // Retourner une réponse de succès
+                return response("Le groupElement a été mis à jour avec succès.", 200);
+            } else {
+                // Si aucun changement n'a été effectué, retourner une réponse appropriée
+                return response("Aucune modification n'a été apportée.", 200);
+            }
+        } catch (\Exception $e) {
+            // En cas d'erreur, retourner une réponse d'erreur
+            return response("Erreur lors de la mise à jour du groupElement : " . $e->getMessage(), 400);
+        }
+    }
+
 }
