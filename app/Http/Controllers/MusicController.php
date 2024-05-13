@@ -41,4 +41,30 @@ class MusicController extends Controller
             return response('Bad request',400);
         }
     }
+
+    public function delete($id)
+    {
+        try {
+            // Trouver l'athlète à supprimer
+            $music = Music::findOrFail($id);
+    
+            $filePathMusic = public_path('musics/' . $music->image_filepath);
+            if (file_exists($filePathMusic)) {
+                unlink($filePathMusic);
+            }
+
+            $filePathImage = public_path('music/' . $music->filename);
+            if (file_exists($filePathImage)) {
+                unlink($filePathImage);
+            }
+
+            $music->delete();
+    
+            // Réponse de succès
+            return response("La musique a été supprimé avec succès.", 200);
+        } catch (\Exception $e) {
+            // En cas d'erreur, retourner une réponse d'erreur
+            return response("Erreur lors de la suppression de la musique : " . $e->getMessage(), 400);
+        }
+    }
 }

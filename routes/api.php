@@ -76,6 +76,7 @@ Route::delete("/del_technic/{id}", [GroupElementController::class, "delete"]);
 Route::delete("/del_level/{id}", [LevelController::class, "delete"]);
 Route::delete("/del_element/{id}", [ElementController::class, "delete"]);
 Route::delete("/del_variation/{id}", [VariationController::class, "delete"]);
+Route::delete("/del_music/{id}", [MusicController::class, "delete"]);
 
 
 
